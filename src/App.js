@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './App.css';
+import 'materialize-css/dist/css/materialize.min.css';
 import Modal from './Components/Modal';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
   const [winners, setWinners] = useState([])
   const [openModal, setOpenModal] = useState(false);
   const [year, setYear] = useState([]);
+  const [modalWinners, setModalWinners] = useState([])
   
   useEffect(()=> {
     axios
@@ -26,6 +28,8 @@ function App() {
   return (
     <div className="App">
      <table>
+     {openModal && <Modal closeModal={setOpenModal} api_year={year} currentWinner={modalWinners} />}
+
      <tbody>
      <tr>
       <th>Year</th>
@@ -33,15 +37,24 @@ function App() {
      </tr>
      
        {
-         winners.map(winner => (<tr>
+         winners.map(
+          winner => (
+          <tr>
           <td>{winner.season}</td>
-          <td><a href="#" onClick={()=> {setOpenModal(true); setYear(winner.season);}}>{winner.DriverStandings[0].Driver.driverId}</a></td>
-          </tr>))
+          <td>
+
+            <a href="#" onClick={()=> {setOpenModal(true); setYear(winner.season); setModalWinners(winner.DriverStandings[0].Driver.givenName.concat(" ").concat(winner.DriverStandings[0].Driver.familyName));}}>
+              {winner.DriverStandings[0].Driver.givenName.concat(" ").concat(winner.DriverStandings[0].Driver.familyName)}
+            </a>
+          </td>
+          </tr>
+          )
+          )
        }
+
        </tbody>
        </table>
 
-       {openModal && <Modal closeModal={setOpenModal} api_year={year} />}
     </div>
   );
 }
