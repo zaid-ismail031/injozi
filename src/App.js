@@ -48,14 +48,9 @@ function App() {
        {
          winners.map(
           winner => (
-          <tr>
+          <tr onClick={()=> {setOpenModal(true); setYear(winner.season); setModalWinners(winner.DriverStandings[0].Driver.givenName.concat(" ").concat(winner.DriverStandings[0].Driver.familyName)); setHidden();}}>
           <td>{winner.season}</td>
-          <td>
-
-            <a href="#" onClick={()=> {setOpenModal(true); setYear(winner.season); setModalWinners(winner.DriverStandings[0].Driver.givenName.concat(" ").concat(winner.DriverStandings[0].Driver.familyName)); setHidden();}}>
-              {winner.DriverStandings[0].Driver.givenName.concat(" ").concat(winner.DriverStandings[0].Driver.familyName)}
-            </a>
-          </td>
+          <td>{winner.DriverStandings[0].Driver.givenName.concat(" ").concat(winner.DriverStandings[0].Driver.familyName)}</td>
           </tr>
           )
           )

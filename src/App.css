@@ -6,3 +6,8 @@
   width: 50%;
   margin: 0 auto;
 }
+
+.listOfWinners tr:hover{
+  background: rgb(200,200,200);
+  cursor: pointer;
+}

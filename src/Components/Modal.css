@@ -46,6 +46,12 @@
     overflow-y: auto;
 }
 
+.modalContainer .body th {
+    background: white;
+    position: sticky;
+    top: 0;
+}
+
 .modalContainer .footer {
     flex: 20%;
     display: flex;
