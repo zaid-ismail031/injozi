@@ -11,6 +11,7 @@ function Modal ({closeModal, api_year, currentWinner}) {
     console.log(api_year)
     console.log(currentWinner)
 
+
     useEffect(()=> {
         axios
           .get(`http://ergast.com/api/f1/${api_year}/results/1.json`)
@@ -23,12 +24,22 @@ function Modal ({closeModal, api_year, currentWinner}) {
           })
       }, [])
 
+    const setHidden = () => {
+      console.log(document.body.style.overflow);
+      if (document.body.style.overflow !== "hidden") {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "scroll";
+      }
+    };
+
+
     return (<div className="modalBackground">
         <div className="modalContainer">
             <div title="titleCloseBtn">
-                <button onClick={() => {closeModal(false)}}> X </button>
+                <button onClick={() => {closeModal(false); setHidden();}}> X </button>
             </div>
-            <div className="title"><h4>{api_year}</h4></div>
+            <div className="title"><h4>{api_year} Season</h4></div>
             <div className="body">
 
                 <table>
@@ -40,7 +51,7 @@ function Modal ({closeModal, api_year, currentWinner}) {
                         {
                         raceWinners.map(
                             raceWinner => (
-                                <tr>
+                                <tr style={{backgroundColor: raceWinner.Results[0].Driver.givenName.concat(" ").concat(raceWinner.Results[0].Driver.familyName) === currentWinner ? "yellow": "white"}}>
                                     <td>{raceWinner.round}</td>
                                     <td>{raceWinner.Results[0].Driver.givenName.concat(" ").concat(raceWinner.Results[0].Driver.familyName)}</td>
                                 </tr>                                

@@ -24,12 +24,21 @@ function App() {
       })
   }, [])
 
+  const setHidden = () => {
+    console.log(document.body.style.overflow);
+    if (document.body.style.overflow !== "hidden") {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "scroll";
+    }
+  };
+
 
   return (
     <div className="App">
-     <table>
-     {openModal && <Modal closeModal={setOpenModal} api_year={year} currentWinner={modalWinners} />}
-
+    {openModal && <Modal closeModal={setOpenModal} api_year={year} currentWinner={modalWinners} />} 
+     <h4>F1 World Championship Winners (2005-Present)</h4>
+     <table className="listOfWinners">
      <tbody>
      <tr>
       <th>Year</th>
@@ -43,7 +52,7 @@ function App() {
           <td>{winner.season}</td>
           <td>
 
-            <a href="#" onClick={()=> {setOpenModal(true); setYear(winner.season); setModalWinners(winner.DriverStandings[0].Driver.givenName.concat(" ").concat(winner.DriverStandings[0].Driver.familyName));}}>
+            <a href="#" onClick={()=> {setOpenModal(true); setYear(winner.season); setModalWinners(winner.DriverStandings[0].Driver.givenName.concat(" ").concat(winner.DriverStandings[0].Driver.familyName)); setHidden();}}>
               {winner.DriverStandings[0].Driver.givenName.concat(" ").concat(winner.DriverStandings[0].Driver.familyName)}
             </a>
           </td>
