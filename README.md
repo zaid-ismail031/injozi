@@ -1,9 +1,7 @@
 # injozi
 
-Build docker image with:
+Run:
 
-`docker build -t express .`
+`docker-compose up -d`
 
-Run docker image:
-
-`docker run -p 3000:3000 express`
+Once compiled, the app should be running on localhost:3000
