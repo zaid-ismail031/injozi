@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  server:
+    container_name: injozi_zaid
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
