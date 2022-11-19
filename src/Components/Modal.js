@@ -5,25 +5,24 @@ import './Modal.css'
 
 function Modal ({closeModal, api_year, currentWinner}) {
 
-    // http://ergast.com/api/f1/2008/results/1.json
     const [raceWinners, setRaceWinners] = useState([]);
 
     console.log(api_year)
     console.log(currentWinner)
 
-
+    // get data from api
     useEffect(()=> {
         axios
           .get(`http://ergast.com/api/f1/${api_year}/results/1.json`)
           .then(res => {
-            //console.log(res.data.MRData.StandingsTable.StandingsLists);
             setRaceWinners(res.data.MRData.RaceTable.Races);
           })
           .catch(err => {
             console.log(err);
           })
       }, [])
-
+    
+    // enable/disable scrolling of background whenever modal is closed
     const setHidden = () => {
       console.log(document.body.style.overflow);
       if (document.body.style.overflow !== "hidden") {

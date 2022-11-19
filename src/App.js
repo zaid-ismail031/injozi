@@ -6,12 +6,13 @@ import Modal from './Components/Modal';
 
 function App() {
 
-  // http://ergast.com/api/f1/driverStandings/1.json?limit=30&offset=55
+  // initialize state variables
   const [winners, setWinners] = useState([])
   const [openModal, setOpenModal] = useState(false);
   const [year, setYear] = useState([]);
   const [modalWinners, setModalWinners] = useState([])
   
+  // get data from api
   useEffect(()=> {
     axios
       .get('http://ergast.com/api/f1/driverStandings/1.json?limit=30&offset=55')
@@ -24,6 +25,7 @@ function App() {
       })
   }, [])
 
+  // enable/disable scrolling of background whenever modal is open
   const setHidden = () => {
     console.log(document.body.style.overflow);
     if (document.body.style.overflow !== "hidden") {
@@ -33,7 +35,7 @@ function App() {
     }
   };
 
-
+  // render page
   return (
     <div className="App">
     {openModal && <Modal closeModal={setOpenModal} api_year={year} currentWinner={modalWinners} />} 
